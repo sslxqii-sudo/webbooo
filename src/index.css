@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#0d1117] text-slate-100 antialiased overflow-x-hidden;
+  }
+}
+
+/* Custom Cyber-Emerald glow effects */
+.cyber-glow-btn {
+  box-shadow: 0 0 20px -5px rgba(16, 185, 129, 0.5), 0 0 8px rgba(163, 230, 53, 0.3);
+}
+
+.cyber-glow-btn:hover {
+  box-shadow: 0 0 32px 0px rgba(16, 185, 129, 0.7), 0 0 16px rgba(163, 230, 53, 0.5);
+}
+
+.glass-panel {
+  background: rgba(13, 17, 23, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(16, 185, 129, 0.16);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(163, 230, 53, 0.35);
+  background: rgba(18, 24, 32, 0.85);
+}
+
+.text-gradient-emerald-lime {
+  background: linear-gradient(135deg, #10b981 0%, #34d399 35%, #a3e635 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Card shine animation */
+@keyframes cardShine {
+  0% { transform: translateX(-150%) skewX(-12deg); opacity: 0; }
+  30% { opacity: 0.35; }
+  100% { transform: translateX(300%) skewX(-12deg); opacity: 0; }
+}
+
+.animate-card-shine {
+  animation: cardShine 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}

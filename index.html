@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shree Lakshmi | AI/ML Engineer & Student Developer</title>
+  <meta name="description" content="Portfolio of Shree Lakshmi - 2nd year AIML engineer at KSIT passionate about web development, AI, and building real-world projects. Cyber-Emerald dark mode." />
+
+  <!-- Google Fonts: Syne, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            carbon: {
+              950: '#070a0e',
+              900: '#0d1117',
+              850: '#121820',
+              800: '#161e29',
+              700: '#212c3d',
+            },
+            cyber: {
+              emerald: '#10b981',
+              'emerald-glow': '#059669',
+              lime: '#a3e635',
+              'lime-bright': '#bef264',
+              teal: '#14b8a6',
+              dark: '#0d1117',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            display: ['Syne', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          animation: {
+            'radar-slow': 'radar 3s ease-out infinite',
+            'pulse-subtle': 'pulseSubtle 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+          },
+          keyframes: {
+            radar: {
+              '0%': { transform: 'scale(1)', opacity: '0.9' },
+              '70%': { transform: 'scale(2.4)', opacity: '0' },
+              '100%': { transform: 'scale(2.4)', opacity: '0' },
+            },
+            pulseSubtle: {
+              '0%, 100%': { opacity: '1' },
+              '50%': { opacity: '0.6' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            glowPulse: {
+              '0%, 100%': { filter: 'drop-shadow(0 0 15px rgba(16, 185, 129, 0.4))' },
+              '50%': { filter: 'drop-shadow(0 0 30px rgba(163, 230, 53, 0.6))' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons & React Scripts -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    /* Custom Scrollbar & Selection */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d1117;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #10b981;
+    }
+    ::selection {
+      background: rgba(16, 185, 129, 0.35);
+      color: #bef264;
+    }
+
+    /* Ambient noise & cyber glow helpers */
+    .cyber-glow-btn {
+      box-shadow: 0 0 20px -5px rgba(16, 185, 129, 0.5), 0 0 8px rgba(163, 230, 53, 0.3);
+    }
+    .cyber-glow-btn:hover {
+      box-shadow: 0 0 32px 0px rgba(16, 185, 129, 0.7), 0 0 16px rgba(163, 230, 53, 0.5);
+    }
+    .glass-panel {
+      background: rgba(13, 17, 23, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(16, 185, 129, 0.16);
+    }
+    .glass-panel-hover:hover {
+      border-color: rgba(163, 230, 53, 0.35);
+      background: rgba(18, 24, 32, 0.85);
+    }
+    .text-gradient-emerald-lime {
+      background: linear-gradient(135deg, #10b981 0%, #34d399 35%, #a3e635 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Card shine animation */
+    @keyframes cardShine {
+      0% { transform: translateX(-150%) skewX(-12deg); opacity: 0; }
+      30% { opacity: 0.35; }
+      100% { transform: translateX(300%) skewX(-12deg); opacity: 0; }
+    }
+    .animate-card-shine {
+      animation: cardShine 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+  </style>
+</head>
+<body class="bg-[#0d1117] text-slate-100 font-sans antialiased selection:bg-emerald-500/30 selection:text-lime-300 min-h-screen overflow-x-hidden">
+  <div id="root"></div>
+
+  <!-- React Application via Babel -->
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // --- Lucide-style Inline SVG Icons ---
+    const CodeIcon = () => (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+    );
+
+    const ArrowUpRightIcon = () => (
+      <svg className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="7" y1="17" x2="17" y2="7"></line>
+        <polyline points="7 7 17 7 17 17"></polyline>
+      </svg>
+    );
+
+    const ExternalLinkIcon = () => (
+      <svg className="w-3.5 h-3.5 ml-1.5 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" y1="14" x2="21" y2="3"></line>
+      </svg>
+    );
+
+    const GithubIcon = () => (
+      <svg className="w-3.5 h-3.5 mr-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+      </svg>
+    );
+
+    const DownloadIcon = () => (
+      <svg className="w-4 h-4 mr-2 transition-transform group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+    );
+
+    const SparklesIcon = () => (
+      <svg className="w-4 h-4 text-lime-400 inline-block mr-1.5 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+      </svg>
+    );
+
+    const MenuIcon = () => (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="4" y1="8" x2="20" y2="8"></line>
+        <line x1="4" y1="16" x2="20" y2="16"></line>
+      </svg>
+    );
+
+    const CloseIcon = () => (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    );
+
+    const TerminalIcon = () => (
+      <svg className="w-4 h-4 mr-1 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="4 17 10 11 4 5"></polyline>
+        <line x1="12" y1="19" x2="20" y2="19"></line>
+      </svg>
+    );
+
+    // ==========================================
+    // 1. Matrix Dot Grid HTML5 Canvas Background
+    // ==========================================
+    function MatrixGridCanvas({ rippleIntensity = 1, showControls = false }) {
+      const canvasRef = useRef(null);
+
+      useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let animationFrameId;
+
+        // Size handling
+        let width = (canvas.width = window.innerWidth);
+        let height = (canvas.height = window.innerHeight);
+
+        const handleResize = () => {
+          width = canvas.width = window.innerWidth;
+          height = canvas.height = window.innerHeight;
+          initGrid();
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Grid config
+        const spacing = 38; // distance between dots
+        let dots = [];
+        let ripples = [];
+
+        // Interactive mouse state with smooth interpolation
+        const mouse = {
+          x: width * 0.5,
+          y: height * 0.35,
+          targetX: width * 0.5,
+          targetY: height * 0.35,
+          isHovered: false,
+          speed: 0,
+        };
+
+        let lastMousePos = { x: mouse.x, y: mouse.y };
+
+        const handleMouseMove = (e) => {
+          const rect = canvas.getBoundingClientRect();
+          mouse.targetX = e.clientX - rect.left;
+          mouse.targetY = e.clientY - rect.top;
+          mouse.isHovered = true;
+
+          // Compute cursor speed to create dynamic micro-ripples
+          const dx = mouse.targetX - lastMousePos.x;
+          const dy = mouse.targetY - lastMousePos.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          mouse.speed = Math.min(dist, 40);
+          lastMousePos = { x: mouse.targetX, y: mouse.targetY };
+
+          // Add gentle ripple trail on rapid mouse moves
+          if (dist > 18 && Math.random() > 0.6) {
+            ripples.push({
+              x: mouse.targetX,
+              y: mouse.targetY,
+              radius: 5,
+              maxRadius: 180 + Math.random() * 60,
+              speed: 3.5,
+              strength: 1.0,
+              hue: Math.random() > 0.4 ? 'emerald' : 'lime'
+            });
+          }
+        };
+
+        const handleMouseLeave = () => {
+          mouse.isHovered = false;
+        };
+
+        const handleClick = (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const clickX = e.clientX - rect.left;
+          const clickY = e.clientY - rect.top;
+
+          // Double ripple blast on click
+          ripples.push({
+            x: clickX,
+            y: clickY,
+            radius: 4,
+            maxRadius: 360,
+            speed: 5.5,
+            strength: 1.8,
+            hue: 'lime'
+          });
+          ripples.push({
+            x: clickX,
+            y: clickY,
+            radius: 8,
+            maxRadius: 240,
+            speed: 3.8,
+            strength: 1.2,
+            hue: 'emerald'
+          });
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseleave', handleMouseLeave);
+        window.addEventListener('click', handleClick);
+
+        const initGrid = () => {
+          dots = [];
+          const cols = Math.ceil(width / spacing) + 2;
+          const rows = Math.ceil(height / spacing) + 2;
+
+          for (let i = 0; i < cols; i++) {
+            for (let j = 0; j < rows; j++) {
+              dots.push({
+                originX: i * spacing,
+                originY: j * spacing,
+                x: i * spacing,
+                y: j * spacing,
+                baseRadius: (i % 2 === 0 && j % 2 === 0) ? 1.6 : 1.1,
+                noiseOffset: Math.random() * 100,
+              });
+            }
+          }
+        };
+
+        initGrid();
+
+        let time = 0;
+
+        const render = () => {
+          time += 0.02;
+
+          // Smooth mouse motion lerp
+          mouse.x += (mouse.targetX - mouse.x) * 0.08;
+          mouse.y += (mouse.targetY - mouse.y) * 0.08;
+
+          // Clear background to deep matte carbon #0d1117
+          ctx.fillStyle = '#0d1117';
+          ctx.fillRect(0, 0, width, height);
+
+          // Update active ripples
+          for (let r = ripples.length - 1; r >= 0; r--) {
+            const rip = ripples[r];
+            rip.radius += rip.speed;
+            rip.strength *= 0.965; // fade out
+            if (rip.radius > rip.maxRadius || rip.strength < 0.02) {
+              ripples.splice(r, 1);
+            }
+          }
+
+          // Ambient subtle perspective shift based on mouse relative to center
+          const centerX = width * 0.5;
+          const centerY = height * 0.5;
+          const tiltX = (mouse.x - centerX) / centerX; // -1 to 1
+          const tiltY = (mouse.y - centerY) / centerY; // -1 to 1
+
+          // Subtle radial glow under cursor
+          const glowGrad = ctx.createRadialGradient(
+            mouse.x, mouse.y, 10,
+            mouse.x, mouse.y, 350
+          );
+          glowGrad.addColorStop(0, 'rgba(16, 185, 129, 0.08)');
+          glowGrad.addColorStop(0.5, 'rgba(163, 230, 53, 0.03)');
+          glowGrad.addColorStop(1, 'rgba(13, 17, 23, 0)');
+          ctx.fillStyle = glowGrad;
+          ctx.fillRect(0, 0, width, height);
+
+          // Draw Matrix dots
+          const mouseInfluenceRadius = 220;
+          const mouseInfluenceRadiusSq = mouseInfluenceRadius * mouseInfluenceRadius;
+
+          for (let k = 0; k < dots.length; k++) {
+            const dot = dots[k];
+
+            // 1. Perspective offset based on position from center
+            const distFromCenterX = dot.originX - centerX;
+            const distFromCenterY = dot.originY - centerY;
+            const depthFactor = (dot.originY / height) * 0.6 + 0.4; // 3D floor slope feel
+
+            let targetPosX = dot.originX + tiltX * (distFromCenterY * 0.03);
+            let targetPosY = dot.originY + tiltY * (distFromCenterX * 0.03);
+
+            // 2. Ambient harmonic wave motion
+            const waveX = Math.sin(time + dot.originY * 0.015) * 2;
+            const waveY = Math.cos(time + dot.originX * 0.015) * 2;
+            targetPosX += waveX;
+            targetPosY += waveY;
+
+            // 3. Ripple displacement
+            let rippleOffsetStrength = 0;
+            let rippleColorBoost = 0;
+
+            for (let r = 0; r < ripples.length; r++) {
+              const rip = ripples[r];
+              const rdx = targetPosX - rip.x;
+              const rdy = targetPosY - rip.y;
+              const rdist = Math.sqrt(rdx * rdx + rdy * rdy);
+              const diff = Math.abs(rdist - rip.radius);
+
+              if (diff < 45) {
+                const waveFactor = Math.sin((diff / 45) * Math.PI);
+                const push = (waveFactor * 12 * rip.strength);
+                if (rdist > 0.01) {
+                  targetPosX += (rdx / rdist) * push;
+                  targetPosY += (rdy / rdist) * push;
+                }
+                rippleOffsetStrength += waveFactor * rip.strength;
+                rippleColorBoost += waveFactor * rip.strength * (rip.hue === 'lime' ? 1.5 : 1);
+              }
+            }
+
+            // 4. Mouse interaction: gentle repulsion & stretch
+            const mdx = targetPosX - mouse.x;
+            const mdy = targetPosY - mouse.y;
+            const mDistSq = mdx * mdx + mdy * mdy;
+
+            let dotRadius = dot.baseRadius;
+            let alpha = 0.18;
+            let dotColor = '#10b981'; // default emerald
+
+            if (mDistSq < mouseInfluenceRadiusSq) {
+              const mDist = Math.sqrt(mDistSq);
+              const factor = 1 - mDist / mouseInfluenceRadius; // 1 at center, 0 at edge
+
+              // Repulsion
+              const pushDistance = factor * 22;
+              targetPosX += (mdx / (mDist || 1)) * pushDistance;
+              targetPosY += (mdy / (mDist || 1)) * pushDistance;
+
+              // Size enlargement & brightness
+              dotRadius = dot.baseRadius + factor * 2.4;
+              alpha = 0.35 + factor * 0.65;
+
+              // Shift color from emerald to bright lime near center
+              if (factor > 0.45) {
+                dotColor = '#a3e635'; // lime accent
+              } else {
+                dotColor = '#34d399'; // crisp emerald-light
+              }
+            }
+
+            // Apply ripple boost
+            if (rippleColorBoost > 0) {
+              alpha = Math.min(1.0, alpha + rippleColorBoost * 0.7);
+              dotRadius += rippleColorBoost * 1.8;
+              dotColor = '#bef264'; // neon lime
+            }
+
+            // Render Dot
+            ctx.beginPath();
+            ctx.arc(targetPosX, targetPosY, Math.max(0.6, dotRadius), 0, Math.PI * 2);
+            ctx.fillStyle = dotColor;
+            ctx.globalAlpha = Math.min(1, Math.max(0.08, alpha));
+            ctx.fill();
+
+            // Connect nearby points to mouse cursor if very close (Cyber web effect)
+            if (mDistSq < 9000 && mouse.isHovered) {
+              const lineAlpha = (1 - Math.sqrt(mDistSq) / 95) * 0.25;
+              ctx.strokeStyle = '#10b981';
+              ctx.globalAlpha = lineAlpha;
+              ctx.lineWidth = 0.75;
+              ctx.beginPath();
+              ctx.moveTo(targetPosX, targetPosY);
+              ctx.lineTo(mouse.x, mouse.y);
+              ctx.stroke();
+            }
+          }
+
+          ctx.globalAlpha = 1.0;
+          animationFrameId = requestAnimationFrame(render);
+        };
+
+        render();
+
+        return () => {
+          cancelAnimationFrame(animationFrameId);
+          window.removeEventListener('resize', handleResize);
+          window.removeEventListener('mousemove', handleMouseMove);
+          window.removeEventListener('mouseleave', handleMouseLeave);
+          window.removeEventListener('click', handleClick);
+        };
+      }, [rippleIntensity]);
+
+      return (
+        <canvas
+          ref={canvasRef}
+          className="fixed inset-0 pointer-events-auto z-0 w-full h-full"
+          style={{ background: '#0d1117' }}
+        />
+      );
+    }
+
+    // ==========================================
+    // 2. Floating Frosted-Glass Navigation Bar
+    // ==========================================
+    function Navbar() {
+      const [isScrolled, setIsScrolled] = useState(false);
+      const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+      const [activeLink, setActiveLink] = useState('Home');
+
+      const navLinks = [
+        { name: 'About', href: '#about' },
+        { name: 'Projects', href: '#projects' },
+        { name: 'Skills', href: '#skills' },
+        { name: 'Campus Life', href: '#campus-life' },
+        { name: 'Contact', href: '#contact' },
+      ];
+
+      useEffect(() => {
+        const handleScroll = () => {
+          if (window.scrollY > 20) {
+            setIsScrolled(true);
+          } else {
+            setIsScrolled(false);
+          }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      return (
+        <header className="fixed top-0 inset-x-0 z-50 transition-all duration-300 px-4 sm:px-6 lg:px-8 pt-4 pb-2">
+          <nav
+            className={`max-w-6xl mx-auto transition-all duration-500 rounded-2xl ${
+              isScrolled
+                ? 'bg-[#0d1117]/85 backdrop-blur-xl border border-emerald-500/30 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8),0_0_20px_rgba(16,185,129,0.15)] py-2.5 px-4 sm:px-6'
+                : 'bg-[#0d1117]/60 backdrop-blur-md border border-emerald-500/20 shadow-[0_4px_24px_rgba(0,0,0,0.4)] py-3 px-5 sm:px-7'
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              
+              {/* Logo / Name */}
+              <a
+                href="#"
+                className="group flex items-center space-x-2.5 focus:outline-none"
+                onClick={() => setActiveLink('Home')}
+              >
+                <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-carbon-850 border border-emerald-500/40 text-emerald-400 group-hover:border-lime-400 group-hover:text-lime-300 transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.25)] group-hover:shadow-[0_0_20px_rgba(163,230,53,0.4)]">
+                  <span className="font-mono text-sm font-bold tracking-tighter">SL</span>
+                  <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                  </span>
+                </div>
+                
+                <div className="flex flex-col">
+                  <span className="font-display font-bold text-base sm:text-lg tracking-wide text-slate-100 group-hover:text-emerald-300 transition-colors">
+                    shree lakshmi
+                  </span>
+                  <span className="text-[10px] font-mono text-emerald-400/80 -mt-1 tracking-wider uppercase flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-lime-400"></span> AIML @ KSIT
+                  </span>
+                </div>
+              </a>
+
+              {/* Desktop Nav Links */}
+              <div className="hidden md:flex items-center space-x-1 lg:space-x-2 bg-carbon-950/60 p-1.5 rounded-xl border border-emerald-500/15">
+                {navLinks.map((link) => {
+                  const isActive = activeLink === link.name;
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setActiveLink(link.name)}
+                      className={`relative px-3.5 py-1.5 text-xs lg:text-sm font-medium tracking-wide rounded-lg transition-all duration-200 ${
+                        isActive
+                          ? 'text-lime-300 bg-emerald-950/80 shadow-[0_0_12px_rgba(16,185,129,0.3)] border border-emerald-500/40'
+                          : 'text-slate-300 hover:text-emerald-300 hover:bg-emerald-500/10'
+                      }`}
+                    >
+                      {link.name}
+                      {isActive && (
+                        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-gradient-to-r from-emerald-400 to-lime-400 rounded-full" />
+                      )}
+                    </a>
+                  );
+                })}
+              </div>
+
+              {/* Action / Terminal Status Button (Desktop) */}
+              <div className="hidden md:flex items-center space-x-3">
+                <a
+                  href="#contact"
+                  className="group relative inline-flex items-center justify-center px-4 py-2 text-xs font-mono font-semibold text-slate-900 bg-gradient-to-r from-emerald-400 via-teal-300 to-lime-400 rounded-xl transition-all duration-300 shadow-[0_0_18px_rgba(16,185,129,0.35)] hover:shadow-[0_0_26px_rgba(163,230,53,0.6)] hover:-translate-y-0.5 active:translate-y-0"
+                >
+                  <span className="relative flex items-center">
+                    Let's Connect
+                    <ArrowUpRightIcon />
+                  </span>
+                </a>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <div className="flex md:hidden items-center">
+                <button
+                  type="button"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  aria-label="Toggle navigation menu"
+                  className="p-2 rounded-xl text-slate-300 hover:text-emerald-300 hover:bg-emerald-500/10 border border-emerald-500/20 focus:outline-none transition-colors"
+                >
+                  {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+                </button>
+              </div>
+
+            </div>
+
+            {/* Mobile Dropdown Menu with Cyber styling */}
+            {mobileMenuOpen && (
+              <div className="md:hidden mt-3 pt-3 border-t border-emerald-500/20 flex flex-col space-y-1.5 pb-2 animate-fadeIn">
+                <div className="px-3 py-1.5 mb-1 text-[11px] font-mono text-emerald-400 flex items-center justify-between bg-carbon-950/70 rounded-lg">
+                  <span>STATUS: ONLINE</span>
+                  <span className="text-lime-400">KSIT // AIML '27</span>
+                </div>
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => {
+                      setActiveLink(link.name);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`px-4 py-2.5 text-sm font-medium rounded-xl transition-colors flex items-center justify-between ${
+                      activeLink === link.name
+                        ? 'text-lime-300 bg-emerald-950/70 border border-emerald-500/40'
+                        : 'text-slate-300 hover:text-emerald-300 hover:bg-emerald-500/10'
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    <span className="text-xs font-mono text-emerald-500/60">→</span>
+                  </a>
+                ))}
+                <div className="pt-2">
+                  <a
+                    href="#contact"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full flex items-center justify-center px-4 py-2.5 text-xs font-mono font-bold text-slate-950 bg-gradient-to-r from-emerald-400 to-lime-400 rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.4)]"
+                  >
+                    <span>Let's Connect</span>
+                    <ArrowUpRightIcon />
+                  </a>
+                </div>
+              </div>
+            )}
+          </nav>
+        </header>
+      );
+    }
+
+    // ==========================================
+    // 3. Status Radar Pill Component
+    // ==========================================
+    function RadarStatusBadge() {
+      return (
+        <div className="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full bg-carbon-900/90 border border-emerald-500/35 shadow-[0_0_20px_rgba(16,185,129,0.18)] hover:border-emerald-400/60 hover:shadow-[0_0_25px_rgba(163,230,53,0.25)] transition-all duration-300 backdrop-blur-md group cursor-default">
+          {/* Animated Blinking Radar Core */}
+          <div className="relative flex items-center justify-center w-3 h-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400 shadow-[0_0_10px_#10b981]"></span>
+          </div>
+
+          {/* Text with cyber slash accents */}
+          <span className="font-mono text-xs sm:text-[13px] tracking-wide text-slate-200">
+            Student Developer <span className="text-emerald-400 font-bold mx-1">//</span> <span className="text-lime-300 font-medium">Open for Internships</span>
+          </span>
+
+          {/* Micro pulsing spark */}
+          <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse"></span>
+        </div>
+      );
+    }
+
+    // ==========================================
+    // 4. Opening 'Hero' Intro Screen Component
+    // ==========================================
+    function HeroSection() {
+      const [copied, setCopied] = useState(false);
+
+      const handleResumeDownload = (e) => {
+        // Trigger simulated resume download with feedback
+        e.preventDefault();
+        const dummyPdfContent = "%PDF-1.4 ... Shree Lakshmi Resume - 2nd Year AIML Engineer, KSIT ...";
+        const blob = new Blob([dummyPdfContent], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Shree_Lakshmi_Resume.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        alert("Resume download initiated! (Shree_Lakshmi_Resume.pdf)");
+      };
+
+      const copyEmail = () => {
+        navigator.clipboard.writeText("shreelakshmi.aiml@ksit.edu.in");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2200);
+      };
+
+      return (
+        <section className="relative z-10 min-h-screen flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto w-full flex flex-col items-center text-center">
+            
+            {/* Top Badge */}
+            <div className="mb-6 sm:mb-8 animate-fadeIn">
+              <RadarStatusBadge />
+            </div>
+
+            {/* Main Headline */}
+            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-extrabold tracking-tight text-slate-100 leading-[1.12] max-w-4xl">
+              Hey, I am{' '}
+              <span className="relative inline-block">
+                <span className="text-gradient-emerald-lime drop-shadow-[0_0_40px_rgba(16,185,129,0.35)]">
+                  shree lakshmi
+                </span>
+                {/* Subtle tech underline accent */}
+                <svg className="absolute -bottom-2 left-0 w-full h-2 text-emerald-400/50" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="2" fill="none" />
+                </svg>
+              </span>
+              <span className="text-emerald-400 font-mono font-light ml-1 sm:ml-2">—</span>
+              <br className="hidden sm:inline" />
+              <span className="text-slate-100 block sm:inline mt-2 sm:mt-0 font-display">
+                {' '}Building the Future of Tech.
+              </span>
+            </h1>
+
+            {/* Student Bio */}
+            <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-slate-300/90 max-w-2xl font-normal leading-relaxed font-sans">
+              <span className="text-white font-medium">2nd year AIML engineer</span> at{' '}
+              <span className="text-emerald-400 font-semibold bg-emerald-950/50 px-2 py-0.5 rounded-md border border-emerald-500/30">KSIT</span>{' '}
+              passionate about <span className="text-lime-300 font-medium">web development</span>,{' '}
+              <span className="text-emerald-300 font-medium">AI</span>, and building real-world projects.
+            </p>
+
+            {/* Action Buttons */}
+            <div className="mt-9 sm:mt-11 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full sm:w-auto">
+              
+              {/* Primary Glowing Emerald Button */}
+              <a
+                href="#projects"
+                className="w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-4 text-sm sm:text-base font-semibold text-carbon-950 bg-gradient-to-r from-emerald-400 via-teal-300 to-lime-400 rounded-xl cyber-glow-btn hover:-translate-y-1 active:translate-y-0 transition-all duration-300 focus:outline-none"
+              >
+                <span className="relative flex items-center font-bold tracking-wide">
+                  View My Projects
+                  <ArrowUpRightIcon />
+                </span>
+              </a>
+
+              {/* Secondary Outline Button */}
+              <button
+                type="button"
+                onClick={handleResumeDownload}
+                className="w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-4 text-sm sm:text-base font-medium text-emerald-300 hover:text-white bg-carbon-900/80 hover:bg-emerald-950/40 rounded-xl border border-emerald-500/40 hover:border-lime-400/80 shadow-[0_0_15px_rgba(16,185,129,0.15)] hover:shadow-[0_0_24px_rgba(16,185,129,0.3)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 focus:outline-none"
+              >
+                <DownloadIcon />
+                <span>Download Resume / CV</span>
+              </button>
+            </div>
+
+            {/* Quick Interactive Terminal Pill / Highlights */}
+            <div className="mt-12 sm:mt-16 w-full max-w-3xl glass-panel rounded-2xl p-4 sm:p-5 shadow-2xl">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-emerald-500/20 pb-3 text-xs font-mono">
+                <div className="flex items-center space-x-2 text-emerald-400">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                  <span className="ml-2 text-slate-400">shree@ksit-terminal:~$</span>
+                </div>
+                <div className="text-slate-400 text-[11px] flex items-center gap-1.5">
+                  <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  BENGALURU, INDIA (IST)
+                </div>
+              </div>
+
+              {/* Tech Badges / Specializations */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3.5 text-left">
+                <div className="p-2.5 rounded-xl bg-carbon-950/60 border border-emerald-500/15">
+                  <div className="text-[10px] font-mono text-emerald-400/80 uppercase">Primary Focus</div>
+                  <div className="text-sm font-semibold text-slate-100 mt-0.5">AI / Machine Learning</div>
+                </div>
+                <div className="p-2.5 rounded-xl bg-carbon-950/60 border border-emerald-500/15">
+                  <div className="text-[10px] font-mono text-lime-400/80 uppercase">Frontend Craft</div>
+                  <div className="text-sm font-semibold text-slate-100 mt-0.5">React + Tailwind</div>
+                </div>
+                <div className="p-2.5 rounded-xl bg-carbon-950/60 border border-emerald-500/15">
+                  <div className="text-[10px] font-mono text-teal-400/80 uppercase">Institution</div>
+                  <div className="text-sm font-semibold text-slate-100 mt-0.5">KSIT, Batch of '27</div>
+                </div>
+                <div className="p-2.5 rounded-xl bg-carbon-950/60 border border-emerald-500/15">
+                  <div className="text-[10px] font-mono text-emerald-400/80 uppercase">Availability</div>
+                  <div className="text-sm font-semibold text-lime-300 mt-0.5">Summer '25 Intern</div>
+                </div>
+              </div>
+
+              {/* Interactive hint */}
+              <div className="mt-3.5 pt-3 border-t border-emerald-500/10 flex flex-wrap items-center justify-between text-[11px] font-mono text-slate-400">
+                <div className="flex items-center gap-1">
+                  <span className="text-emerald-400 font-bold">Tip:</span> Move mouse or click anywhere to trigger canvas ripples.
+                </div>
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  className="hover:text-lime-300 transition-colors flex items-center gap-1 focus:outline-none"
+                >
+                  <span>{copied ? '✓ Copied to clipboard!' : 'shreelakshmi.aiml@ksit.edu.in'}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Scroll Down Indicator */}
+            <div className="mt-12 flex flex-col items-center">
+              <a
+                href="#projects"
+                className="group flex flex-col items-center text-slate-400 hover:text-emerald-400 transition-colors"
+              >
+                <span className="text-[11px] font-mono tracking-widest uppercase mb-1.5 text-slate-500 group-hover:text-emerald-400">
+                  Explore Section
+                </span>
+                <div className="w-5 h-8 rounded-full border border-emerald-500/30 flex items-start justify-center p-1 group-hover:border-emerald-400 transition-colors">
+                  <div className="w-1.5 h-2 rounded-full bg-emerald-400 animate-bounce"></div>
+                </div>
+              </a>
+            </div>
+
+          </div>
+        </section>
+      );
+    }
+
+    // ==========================================
+    // 5. Interactive 3D Perspective Tilt Project Card
+    // ==========================================
+    function ProjectCard({ project, onDemoClick, onCodeClick }) {
+      const cardRef = useRef(null);
+      const [coords, setCoords] = useState({ x: 0, y: 0 });
+      const [isHovered, setIsHovered] = useState(false);
+      const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
+
+      const handleMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        // Subtle 3D perspective tilt angles based on mouse position relative to center
+        const rotateX = -((y - centerY) / centerY) * 8.5;
+        const rotateY = ((x - centerX) / centerX) * 8.5;
+
+        setCoords({ x: rotateX, y: rotateY });
+        setGlarePos({
+          x: (x / rect.width) * 100,
+          y: (y / rect.height) * 100,
+        });
+      };
+
+      const handleMouseEnter = () => {
+        setIsHovered(true);
+      };
+
+      const handleMouseLeave = () => {
+        setIsHovered(false);
+        setCoords({ x: 0, y: 0 });
+      };
+
+      return (
+        <div
+          ref={cardRef}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            transformStyle: 'preserve-3d',
+            transform: isHovered
+              ? `perspective(1000px) rotateX(${coords.x}deg) rotateY(${coords.y}deg) translateY(-6px) scale3d(1.02, 1.02, 1.02)`
+              : 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)',
+            transition: isHovered
+              ? 'transform 0.12s ease-out, border-color 0.3s ease, box-shadow 0.3s ease'
+              : 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.5s ease, box-shadow 0.5s ease',
+          }}
+          className={`relative rounded-2xl p-6 sm:p-7 glass-panel border border-emerald-500/20 overflow-hidden flex flex-col justify-between group cursor-default transition-all duration-300 ${
+            isHovered
+              ? 'border-emerald-400/50 shadow-[0_16px_36px_-8px_rgba(16,185,129,0.35),0_0_24px_rgba(163,230,53,0.18)]'
+              : 'shadow-[0_8px_24px_rgba(0,0,0,0.5)]'
+          }`}
+        >
+          {/* Sleek Shine / Glare Reflection following mouse */}
+          <div
+            className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300"
+            style={{
+              opacity: isHovered ? 0.35 : 0,
+              background: `radial-gradient(circle 300px at ${glarePos.x}% ${glarePos.y}%, rgba(163, 230, 53, 0.35), rgba(16, 185, 129, 0.15) 40%, transparent 80%)`,
+            }}
+          />
+
+          {/* Sleek Diagonal Shine Bar */}
+          <div className="pointer-events-none absolute -inset-full top-0 block h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-emerald-400/15 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-card-shine" />
+
+          {/* 3D Foreground Content Layer */}
+          <div
+            style={{ transform: 'translateZ(26px)' }}
+            className="relative z-20 flex flex-col h-full justify-between"
+          >
+            <div>
+              {/* Card Top: Category Badge & Index Indicator */}
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-carbon-950/90 text-lime-300 border border-emerald-500/30">
+                    {project.categoryBadge}
+                  </span>
+                </div>
+                <span className="font-mono text-xs text-emerald-400/70 font-semibold tracking-wider">
+                  {project.id}
+                </span>
+              </div>
+
+              {/* Project Title */}
+              <h3 className="font-display font-bold text-xl sm:text-2xl text-slate-100 group-hover:text-emerald-300 transition-colors mb-3">
+                {project.title}
+              </h3>
+
+              {/* 2-Sentence Description */}
+              <p className="text-sm text-slate-300/90 leading-relaxed font-sans mb-5">
+                {project.description}
+              </p>
+
+              {/* Tech Badges */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {project.techBadges.map((badge, idx) => (
+                  <span
+                    key={idx}
+                    className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-carbon-950/90 text-slate-300 border border-emerald-500/20 group-hover:border-emerald-500/40 group-hover:text-emerald-300 transition-colors"
+                  >
+                    {badge}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Action Buttons: 'Live Demo' & 'GitHub Code' */}
+            <div className="pt-4 border-t border-emerald-500/15 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => onDemoClick(project)}
+                className="flex-1 group/btn inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-mono font-semibold text-carbon-950 bg-gradient-to-r from-emerald-400 to-lime-400 hover:from-emerald-300 hover:to-lime-300 transition-all duration-200 shadow-[0_0_15px_rgba(16,185,129,0.35)] hover:shadow-[0_0_22px_rgba(163,230,53,0.5)] active:scale-[0.98] focus:outline-none"
+              >
+                <span>Live Demo</span>
+                <ExternalLinkIcon />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => onCodeClick(project)}
+                className="flex-1 group/btn inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-mono font-medium text-emerald-300 hover:text-white bg-carbon-950/80 hover:bg-emerald-950/50 border border-emerald-500/40 hover:border-lime-400 transition-all duration-200 shadow-sm active:scale-[0.98] focus:outline-none"
+              >
+                <GithubIcon />
+                <span>GitHub Code</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ==========================================
+    // 6. Featured Projects Showcase Component
+    // ==========================================
+    function FeaturedProjectsSection() {
+      const [activeFilter, setActiveFilter] = useState('All');
+      const [activeModal, setActiveModal] = useState(null);
+
+      const projects = [
+        {
+          id: "01 // FULL-STACK",
+          title: "Campus Event Finder",
+          categoryBadge: "Web Apps",
+          categories: ["All", "Web Apps", "Mini-Projects"],
+          description: "A centralized campus discovery platform that aggregates hackathons, tech workshops, and college fests into an interactive real-time timeline. Eliminates fragmented WhatsApp announcements and enables instant RSVP syncing directly to student Google Calendars.",
+          techBadges: ["React", "Firebase", "Tailwind CSS", "REST API"],
+          demoUrl: "https://campus-events-demo.ksit.dev",
+          githubUrl: "https://github.com/shreelakshmi/campus-event-finder"
+        },
+        {
+          id: "02 // COMPUTER VISION",
+          title: "Smart Attendance Tracker",
+          categoryBadge: "AI / ML",
+          categories: ["All", "AI / ML"],
+          description: "An automated classroom attendance system utilizing facial recognition and computer vision to verify student check-ins in under two seconds. Minimizes proxy attendance while automatically syncing real-time attendance rosters to faculty analytics dashboards.",
+          techBadges: ["Python", "OpenCV", "TensorFlow", "FastAPI"],
+          demoUrl: "https://smart-attendance-demo.ksit.dev",
+          githubUrl: "https://github.com/shreelakshmi/smart-attendance-tracker"
+        },
+        {
+          id: "03 // ACADEMIC PLATFORM",
+          title: "Student Notes Marketplace",
+          categoryBadge: "Web Apps",
+          categories: ["All", "Web Apps", "Mini-Projects"],
+          description: "A peer-to-peer academic repository where engineering students can upload, review, and exchange verified semester study materials and lecture guides. Features categorized subject tagging, peer ratings, and instant previewing to streamline exam prep.",
+          techBadges: ["Tailwind", "Node.js", "Express", "MongoDB"],
+          demoUrl: "https://student-notes-demo.ksit.dev",
+          githubUrl: "https://github.com/shreelakshmi/student-notes-marketplace"
+        }
+      ];
+
+      const filterOptions = [
+        { id: 'All', label: 'All', count: 3 },
+        { id: 'Web Apps', label: 'Web Apps', count: 2 },
+        { id: 'AI / ML', label: 'AI / ML', count: 1 },
+        { id: 'Mini-Projects', label: 'Mini-Projects', count: 2 },
+      ];
+
+      const filteredProjects = activeFilter === 'All'
+        ? projects
+        : projects.filter(p => p.categories.includes(activeFilter));
+
+      const handleDemoClick = (project) => {
+        setActiveModal({
+          title: `${project.title} - Live Demo`,
+          message: `Launching live preview environment for ${project.title}. Demo URL: ${project.demoUrl}`,
+          url: project.demoUrl
+        });
+      };
+
+      const handleCodeClick = (project) => {
+        setActiveModal({
+          title: `${project.title} - Source Code`,
+          message: `Opening GitHub repository for ${project.title}. Repo: ${project.githubUrl}`,
+          url: project.githubUrl
+        });
+      };
+
+      return (
+        <section id="projects" className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-emerald-500/20 gap-4">
+            <div>
+              <div className="flex items-center space-x-2 text-xs font-mono text-emerald-400 mb-2">
+                <span className="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
+                <span>PORTFOLIO HIGHLIGHTS // AIML & WEB DEV</span>
+              </div>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-100 tracking-tight">
+                Featured Projects
+              </h2>
+              <p className="mt-2 text-sm sm:text-base text-slate-400 max-w-xl">
+                Real-world software built to solve actual student and campus challenges with modern AI pipelines and high-performance frontend craft.
+              </p>
+            </div>
+
+            {/* Dynamic Project Counter */}
+            <div className="hidden sm:flex items-center space-x-2 font-mono text-xs text-slate-400 bg-carbon-950/70 px-4 py-2 rounded-xl border border-emerald-500/20">
+              <span className="text-emerald-400 font-bold">{filteredProjects.length}</span> of{' '}
+              <span className="text-slate-200 font-bold">{projects.length}</span> PROJECTS DISPLAYED
+            </div>
+          </div>
+
+          {/* Filter Pill Row */}
+          <div className="flex flex-wrap items-center gap-2.5 mb-10">
+            <span className="text-xs font-mono text-emerald-400/80 mr-1 hidden sm:inline-block">Filter:</span>
+            {filterOptions.map((filter) => {
+              const isActive = activeFilter === filter.id;
+              return (
+                <button
+                  key={filter.id}
+                  type="button"
+                  onClick={() => setActiveFilter(filter.id)}
+                  className={`relative px-4 py-2 rounded-xl text-xs sm:text-sm font-mono tracking-wide transition-all duration-300 flex items-center space-x-2 focus:outline-none ${
+                    isActive
+                      ? 'bg-emerald-950/90 text-lime-300 border border-emerald-400/80 shadow-[0_0_18px_rgba(16,185,129,0.35)] -translate-y-0.5'
+                      : 'bg-carbon-900/60 text-slate-400 hover:text-emerald-300 hover:bg-carbon-850 border border-emerald-500/15'
+                  }`}
+                >
+                  <span>{filter.label}</span>
+                  <span
+                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
+                      isActive
+                        ? 'bg-emerald-400/25 text-lime-300'
+                        : 'bg-carbon-950 text-slate-500'
+                    }`}
+                  >
+                    {filter.count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* 3-Column Grid with 3D Tilt Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+            {filteredProjects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onDemoClick={handleDemoClick}
+                onCodeClick={handleCodeClick}
+              />
+            ))}
+          </div>
+
+          {/* Interactive Modal Toast */}
+          {activeModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-carbon-950/80 backdrop-blur-md animate-fadeIn">
+              <div className="glass-panel border border-emerald-400/40 rounded-2xl max-w-md w-full p-6 shadow-[0_0_40px_rgba(16,185,129,0.3)]">
+                <div className="flex items-center justify-between pb-3 border-b border-emerald-500/20 mb-4">
+                  <div className="flex items-center space-x-2 text-emerald-400 font-mono text-xs">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>EXTERNAL LINK SIMULATOR</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setActiveModal(null)}
+                    className="text-slate-400 hover:text-white p-1 rounded-lg"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <h3 className="font-display font-bold text-lg text-slate-100 mb-2">
+                  {activeModal.title}
+                </h3>
+                <p className="text-sm text-slate-300 mb-5 leading-relaxed font-sans">
+                  {activeModal.message}
+                </p>
+                <div className="flex items-center justify-end gap-3 font-mono text-xs">
+                  <button
+                    type="button"
+                    onClick={() => setActiveModal(null)}
+                    className="px-4 py-2 rounded-xl text-slate-300 hover:text-white bg-carbon-950 border border-emerald-500/20"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      alert(`Redirecting to: ${activeModal.url}`);
+                      setActiveModal(null);
+                    }}
+                    className="px-4 py-2 rounded-xl font-bold bg-gradient-to-r from-emerald-400 to-lime-400 text-carbon-950 shadow-[0_0_15px_rgba(16,185,129,0.4)]"
+                  >
+                    Proceed to URL ↗
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+      );
+    }
+
+    // ==========================================
+    // 7. Tech Stack SVG Logos & Conceptual Icons
+    // ==========================================
+    const CppIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M22.394 6.002L13.606.928a3.212 3.212 0 00-3.212 0L1.606 6.002A3.21 3.21 0 000 8.784v10.15c0 1.15.613 2.21 1.606 2.782l8.788 5.074a3.212 3.212 0 003.212 0l8.788-5.074c.993-.573 1.606-1.633 1.606-2.783V8.784a3.21 3.21 0 00-1.606-2.782zM12 21.65l-7.5-4.33V8.68L12 4.35l7.5 4.33v8.64L12 21.65zm1.5-12.65h-1.8v2.4h-2.4v1.8h2.4v2.4h1.8v-2.4h2.4v-1.8h-2.4V9zm5 0h-1.8v2.4h-2.4v1.8h2.4v2.4h1.8v-2.4h2.4v-1.8h-2.4V9z"/>
+      </svg>
+    );
+
+    const PythonIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.006 2.75h5.813v.825H3.896S0 5.787 0 11.9c0 6.112 3.4 5.88 3.4 5.88h2.03v-2.85s-.11-3.4 3.34-3.4h5.76v-.844h-5.76c-3.45 0-3.34-3.4-3.34-3.4V4.93s.33-2.656 6.48-2.656c6.15 0 5.8 2.656 5.8 2.656v2.33h-2.85v.845h5.75s3.4-.23 3.4 5.88c0 6.113-3.896 6.113-3.896 6.113h-2.02v-2.75s.1-3.4-3.35-3.4h-5.76v.844h5.76c3.45 0 3.35 3.4 3.35 3.4v2.35s-.38 2.656-6.48 2.656c-6.1 0-5.8-2.656-5.8-2.656l-.006-2.75h-2.9v-.825h8.12s3.9.444 3.9-5.67c0-6.112-3.4-5.88-3.4-5.88h-2.03v2.85s.11 3.4-3.34 3.4h-5.76v.844h5.76c3.45 0 3.34-3.4 3.34-3.4V7.26s-.33-2.656-6.48-2.656zM8.88 1.94a.88.88 0 110 1.76.88.88 0 010-1.76zm6.24 18.36a.88.88 0 110 1.76.88.88 0 010-1.76z"/>
+      </svg>
+    );
+
+    const JsIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.017-.888-1.798-2.85-2.584l-.744-.306c-1.2-.5-1.573-.85-1.573-1.47 0-.54.38-1.005 1.2-1.005.815 0 1.258.338 1.54 1.005l1.988-.847c-.508-1.288-1.54-1.92-3.528-1.92-2.32 0-3.454 1.355-3.454 2.898 0 1.762 1.084 2.457 2.846 3.169l.745.305c1.372.56 1.83.983 1.83 1.677 0 .746-.66 1.152-1.66 1.152-1.39 0-2.033-.678-2.355-1.559l-2.05.847c.474 1.457 1.694 2.44 4.405 2.44 2.627 0 3.847-1.321 3.847-3.143l-.004-.704zM13.29 11.23h-2.22v7.184c0 1.458-.695 2.05-1.932 2.05-.627 0-1.084-.118-1.423-.338l-.44.745c.457.305 1.152.474 2.033.474 2.372 0 3.982-1.186 3.982-3.66V11.23z"/>
+      </svg>
+    );
+
+    const JavaIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+        <line x1="6" y1="1" x2="6" y2="4"></line>
+        <line x1="10" y1="1" x2="10" y2="4"></line>
+        <line x1="14" y1="1" x2="14" y2="4"></line>
+      </svg>
+    );
+
+    const SqlIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+      </svg>
+    );
+
+    const TsIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0H1.125zM11.95 8.922h-3.41v9.64h-2.12v-9.64H3.01V7.158h8.94v1.764zm10.02 5.093c-.09.608-.344 1.135-.762 1.58-.418.446-1.002.775-1.752.986-.75.212-1.636.318-2.658.318-.89 0-1.705-.09-2.443-.27-.738-.18-1.34-.455-1.807-.824l.87-1.637c.39.293.882.527 1.478.702.595.176 1.198.264 1.808.264.678 0 1.233-.08 1.665-.24.432-.16.745-.38.938-.66.194-.28.29-.6.29-.96 0-.317-.078-.587-.234-.81-.157-.223-.426-.425-.808-.606-.382-.18-.915-.36-1.6-.54-.86-.23-1.57-.492-2.13-.787-.56-.294-.972-.656-1.236-1.085-.264-.43-.396-.96-.396-1.59 0-.67.165-1.26.495-1.77.33-.51.815-.91 1.455-1.2.64-.29 1.43-.435 2.37-.435.8 0 1.54.08 2.22.24.68.16 1.25.39 1.71.69l-.75 1.65c-.41-.26-.88-.46-1.41-.6-.53-.14-1.07-.21-1.62-.21-.6 0-1.1.07-1.5.21-.4.14-.69.34-.87.6-.18.26-.27.56-.27.9 0 .31.08.57.24.78.16.21.43.4.81.57.38.17.91.35 1.59.54.89.24 1.62.51 2.19.81.57.3.99.68 1.26 1.14.27.46.405 1.02.405 1.68 0 .42-.06.82-.18 1.2z"/>
+      </svg>
+    );
+
+    const ReactIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <ellipse cx="12" cy="12" rx="11" ry="4.2" transform="rotate(30 12 12)" />
+        <ellipse cx="12" cy="12" rx="11" ry="4.2" transform="rotate(90 12 12)" />
+        <ellipse cx="12" cy="12" rx="11" ry="4.2" transform="rotate(150 12 12)" />
+        <circle cx="12" cy="12" r="2" fill="currentColor" />
+      </svg>
+    );
+
+    const TailwindIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z"/>
+      </svg>
+    );
+
+    const NodeIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2l9 5v10l-9 5-9-5V7l9-5z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+    );
+
+    const GitIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="6" y1="3" x2="6" y2="15"></line>
+        <circle cx="18" cy="6" r="3"></circle>
+        <circle cx="6" cy="18" r="3"></circle>
+        <path d="M18 9a9 9 0 0 1-9 9"></path>
+      </svg>
+    );
+
+    const PyTorchIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+      </svg>
+    );
+
+    const FastApiIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+      </svg>
+    );
+
+    const DsaIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="5" r="3"></circle>
+        <circle cx="6" cy="19" r="3"></circle>
+        <circle cx="18" cy="19" r="3"></circle>
+        <line x1="10" y1="7.5" x2="7.5" y2="16.5"></line>
+        <line x1="14" y1="7.5" x2="16.5" y2="16.5"></line>
+      </svg>
+    );
+
+    const OopIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+      </svg>
+    );
+
+    const DbmsIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+      </svg>
+    );
+
+    const OsIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+        <rect x="9" y="9" width="6" height="6"></rect>
+        <line x1="9" y1="1" x2="9" y2="4"></line>
+        <line x1="15" y1="1" x2="15" y2="4"></line>
+        <line x1="9" y1="20" x2="9" y2="23"></line>
+        <line x1="15" y1="20" x2="15" y2="23"></line>
+        <line x1="20" y1="9" x2="23" y2="9"></line>
+        <line x1="20" y1="14" x2="23" y2="14"></line>
+        <line x1="1" y1="9" x2="4" y2="9"></line>
+        <line x1="1" y1="14" x2="4" y2="14"></line>
+      </svg>
+    );
+
+    const NetworksIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+      </svg>
+    );
+
+    // ==========================================
+    // 8. SkillBadge Component with Tooltip
+    // ==========================================
+    function SkillBadge({ name, level, icon: Icon, note }) {
+      const [isHovered, setIsHovered] = useState(false);
+
+      const levelConfigs = {
+        'Proficient': {
+          dotColor: 'bg-emerald-400',
+          textColor: 'text-emerald-300',
+          tag: '🟢 Proficient',
+        },
+        'Familiar': {
+          dotColor: 'bg-lime-400',
+          textColor: 'text-lime-300',
+          tag: '⚡ Familiar',
+        },
+        'Currently Learning': {
+          dotColor: 'bg-teal-400',
+          textColor: 'text-teal-300',
+          tag: '🚀 Learning',
+        }
+      };
+
+      const config = levelConfigs[level] || levelConfigs['Proficient'];
+
+      return (
+        <div
+          className="relative group inline-flex"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {/* Skill Pill Container */}
+          <div
+            className="relative flex items-center space-x-2.5 px-3.5 py-2 rounded-xl bg-carbon-900/80 hover:bg-carbon-850 border border-emerald-500/20 hover:border-emerald-400/80 hover:shadow-[0_0_18px_rgba(16,185,129,0.35),0_0_8px_rgba(163,230,53,0.2)] hover:scale-105 active:scale-100 transition-all duration-200 cursor-default select-none"
+          >
+            {/* Tech Icon */}
+            <div className="w-4 h-4 flex items-center justify-center text-emerald-400 group-hover:text-lime-300 transition-colors">
+              {Icon ? <Icon /> : <span className="text-xs font-mono">#</span>}
+            </div>
+
+            {/* Skill Label */}
+            <span className="text-xs sm:text-sm font-medium text-slate-200 group-hover:text-white transition-colors">
+              {name}
+            </span>
+
+            {/* Comfort Status Micro-Dot */}
+            <span className={`w-1.5 h-1.5 rounded-full ${config.dotColor} opacity-80 group-hover:opacity-100`}></span>
+          </div>
+
+          {/* Floating Comfort Level Tooltip */}
+          <div
+            className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-30 pointer-events-none transition-all duration-200 ease-out ${
+              isHovered
+                ? 'opacity-100 translate-y-0 scale-100'
+                : 'opacity-0 translate-y-1.5 scale-95'
+            }`}
+          >
+            <div className="relative px-3 py-1.5 rounded-lg bg-carbon-950/95 backdrop-blur-md border border-emerald-500/40 shadow-[0_8px_20px_rgba(0,0,0,0.6),0_0_12px_rgba(16,185,129,0.25)] flex flex-col items-center whitespace-nowrap">
+              <span className={`text-[11px] font-mono font-bold ${config.textColor}`}>
+                {config.tag}
+              </span>
+              {note && (
+                <span className="text-[10px] text-slate-400 font-sans mt-0.5">
+                  {note}
+                </span>
+              )}
+              {/* Arrow pointer */}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-emerald-500/40" />
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ==========================================
+    // 9. Tech Stack & Skills Section Component
+    // ==========================================
+    function TechStackSkillsSection() {
+      const categories = [
+        {
+          id: "languages",
+          title: "Languages",
+          badge: "Syntax & Logic",
+          tagline: "Core programming languages for algorithmic problem solving and software architecture.",
+          icon: CppIcon,
+          skills: [
+            { name: "C++", level: "Proficient", icon: CppIcon, note: "Competitive Programming & STL" },
+            { name: "Python", level: "Proficient", icon: PythonIcon, note: "AI/ML, Automation & Scripting" },
+            { name: "JavaScript", level: "Proficient", icon: JsIcon, note: "DOM, Async/Await & Modern Web" },
+            { name: "Java", level: "Familiar", icon: JavaIcon, note: "OOP Foundations & JVM" },
+            { name: "SQL", level: "Familiar", icon: SqlIcon, note: "Relational Queries & Indexing" },
+            { name: "TypeScript", level: "Currently Learning", icon: TsIcon, note: "Type Safety & Enterprise React" },
+          ]
+        },
+        {
+          id: "frameworks",
+          title: "Frameworks & Tools",
+          badge: "Libraries & DevOps",
+          tagline: "Full-stack tools, styling systems, and machine learning pipelines for modern deployment.",
+          icon: ReactIcon,
+          skills: [
+            { name: "React", level: "Proficient", icon: ReactIcon, note: "Hooks, State & Component Architecture" },
+            { name: "Tailwind CSS", level: "Proficient", icon: TailwindIcon, note: "Responsive Cyber-Dark UI Systems" },
+            { name: "Node.js", level: "Familiar", icon: NodeIcon, note: "REST APIs & Backend Runtimes" },
+            { name: "Git / GitHub", level: "Proficient", icon: GitIcon, note: "Branching, Collaboration & PRs" },
+            { name: "PyTorch", level: "Familiar", icon: PyTorchIcon, note: "Neural Networks & Computer Vision" },
+            { name: "FastAPI", level: "Familiar", icon: FastApiIcon, note: "High-throughput Python Microservices" },
+          ]
+        },
+        {
+          id: "concepts",
+          title: "Core CS Concepts",
+          badge: "Theoretical Foundations",
+          tagline: "Fundamental engineering pillars driving robust systems and scalable performance.",
+          icon: DsaIcon,
+          skills: [
+            { name: "Data Structures", level: "Proficient", icon: DsaIcon, note: "Trees, Graphs, DP & Heaps" },
+            { name: "OOP Principles", level: "Proficient", icon: OopIcon, note: "Encapsulation, Polymorphism, Design" },
+            { name: "DBMS", level: "Proficient", icon: DbmsIcon, note: "Normalization, ACID, Transactions" },
+            { name: "Operating Systems", level: "Familiar", icon: OsIcon, note: "Processes, Threads, Memory Mgmt" },
+            { name: "Computer Networks", level: "Familiar", icon: NetworksIcon, note: "TCP/IP, HTTP/S, Sockets" },
+          ]
+        }
+      ];
+
+      return (
+        <section id="skills" className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-emerald-500/20 gap-4">
+            <div>
+              <div className="flex items-center space-x-2 text-xs font-mono text-emerald-400 mb-2">
+                <span className="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
+                <span>02 // ARSENAL & PROFICIENCY</span>
+              </div>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-100 tracking-tight">
+                Tech Stack & Skills
+              </h2>
+              <p className="mt-2 text-sm sm:text-base text-slate-400 max-w-xl">
+                A curated breakdown of the programming languages, full-stack frameworks, and core engineering concepts I use to engineer real-world software.
+              </p>
+            </div>
+
+            {/* Interactive Comfort Level Legend */}
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 p-2.5 rounded-xl bg-carbon-950/80 border border-emerald-500/20 font-mono text-[11px]">
+              <span className="text-slate-400 mr-1">Legend:</span>
+              <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-950/70 text-emerald-300 border border-emerald-500/30">
+                <span className="w-2 h-2 rounded-full bg-emerald-400"></span> Proficient
+              </span>
+              <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-lime-950/70 text-lime-300 border border-lime-500/30">
+                <span className="w-2 h-2 rounded-full bg-lime-400"></span> Familiar
+              </span>
+              <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-teal-950/70 text-teal-300 border border-teal-500/30">
+                <span className="w-2 h-2 rounded-full bg-teal-400"></span> Learning
+              </span>
+            </div>
+          </div>
+
+          {/* 3 Categorized Skill Panels */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-7">
+            {categories.map((category) => {
+              const CategoryIcon = category.icon;
+              return (
+                <div
+                  key={category.id}
+                  className="glass-panel rounded-2xl p-6 sm:p-7 border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between group shadow-[0_8px_24px_rgba(0,0,0,0.5)] hover:shadow-[0_12px_30px_rgba(16,185,129,0.15)]"
+                >
+                  <div>
+                    {/* Category Header */}
+                    <div className="flex items-center justify-between pb-4 border-b border-emerald-500/15 mb-5">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-9 h-9 rounded-xl bg-carbon-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:text-lime-300 group-hover:border-lime-400/50 transition-colors shadow-sm">
+                          <CategoryIcon />
+                        </div>
+                        <div>
+                          <h3 className="font-display font-bold text-lg text-slate-100 group-hover:text-emerald-300 transition-colors">
+                            {category.title}
+                          </h3>
+                          <span className="text-[10px] font-mono text-emerald-400/70 uppercase tracking-wider block">
+                            {category.badge}
+                          </span>
+                        </div>
+                      </div>
+                      <span className="font-mono text-xs text-slate-500">
+                        {category.skills.length} Items
+                      </span>
+                    </div>
+
+                    {/* Subtitle / Scope */}
+                    <p className="text-xs text-slate-400 mb-6 leading-relaxed font-sans">
+                      {category.tagline}
+                    </p>
+
+                    {/* Interactive Skill Pill Badges */}
+                    <div className="flex flex-wrap gap-2.5">
+                      {category.skills.map((skill, sIdx) => (
+                        <SkillBadge
+                          key={sIdx}
+                          name={skill.name}
+                          level={skill.level}
+                          icon={skill.icon}
+                          note={skill.note}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Card Footer Note */}
+                  <div className="mt-8 pt-4 border-t border-emerald-500/10 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                    <span>Verified @ KSIT AIML</span>
+                    <span className="text-emerald-400/80 flex items-center gap-1">
+                      Hover for status ↗
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+
+    // ==========================================
+    // 10. Education & Campus Journey Component
+    // ==========================================
+    function EducationCampusJourneySection() {
+      const milestones = [
+        {
+          year: "2026",
+          status: "CURRENT FOCUS",
+          title: "Pre-Final Year B.Tech & Hackathon Finalist",
+          institution: "KSIT Bangalore // Dept. of AIML",
+          description: "Deepening AI/ML neural architecture research, leading student dev hackathons, and qualified as a finalist in national smart campus engineering competitions.",
+          badge: "In Progress"
+        },
+        {
+          year: "2025",
+          status: "CAMPUS LEADERSHIP",
+          title: "Core Technical Club Member / Web Lead",
+          institution: "Student Developer Guild // KSIT",
+          description: "Spearheaded web development initiatives for the campus engineering society and architected event registration portals.",
+          badge: "Completed"
+        },
+        {
+          year: "2024",
+          status: "FOUNDATIONAL MILESTONE",
+          title: "Began Degree & Built First Web App",
+          institution: "Kammavari Sangham Institute of Technology",
+          description: "Started Artificial Intelligence & Machine Learning journey at KSIT, mastered core C++ & Python fundamentals, and shipped first full-stack projects.",
+          badge: "Completed"
+        }
+      ];
+
+      const achievements = [
+        {
+          icon: "🏆",
+          title: "1st Place - University Hackathon",
+          category: "Competitive Coding",
+          description: "Built an AI-driven automated campus navigation bot in 24 hours.",
+          highlight: "Winner // Smart Campus Track"
+        },
+        {
+          icon: "⚡",
+          title: "150+ LeetCode Problems Solved",
+          category: "Algorithms & DSA",
+          description: "Proficient in graph traversals, binary trees, dynamic programming, and heaps.",
+          highlight: "Consistent Practice"
+        },
+        {
+          icon: "👥",
+          title: "Tech Club Organizer",
+          category: "Student Leadership",
+          description: "Mentored 80+ junior engineering students in Git, web design, and algorithmic thinking.",
+          highlight: "KSIT Community"
+        },
+        {
+          icon: "📜",
+          title: "Full-Stack Certified",
+          category: "Professional Credential",
+          description: "Completed comprehensive certifications in modern React, RESTful APIs, and cloud basics.",
+          highlight: "Verified Excellence"
+        }
+      ];
+
+      return (
+        <section id="campus-life" className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          {/* Anchor hook for 'About' link */}
+          <div id="about" className="-mt-16 pt-16"></div>
+
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-emerald-500/20 gap-4">
+            <div>
+              <div className="flex items-center space-x-2 text-xs font-mono text-emerald-400 mb-2">
+                <span className="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
+                <span>03 // ACADEMIC & LEADERSHIP TRAJECTORY</span>
+              </div>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-100 tracking-tight">
+                Education & Campus Journey
+              </h2>
+              <p className="mt-2 text-sm sm:text-base text-slate-400 max-w-xl">
+                My engineering trajectory at KSIT, blending theoretical foundations in Artificial Intelligence with hands-on technical community leadership.
+              </p>
+            </div>
+
+            <div className="hidden sm:flex items-center space-x-2 font-mono text-xs text-slate-400 bg-carbon-950/70 px-4 py-2 rounded-xl border border-emerald-500/20">
+              <span className="text-emerald-400 font-bold">KSIT</span>
+              <span className="text-slate-600">//</span>
+              <span className="text-lime-300">AIML '27 BENGALURU</span>
+            </div>
+          </div>
+
+          {/* Main Grid: Left Timeline + Right Achievement Badges */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+            
+            {/* Left Column: Interactive Milestone Timeline (7 cols) */}
+            <div className="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-8 border border-emerald-500/20 shadow-xl">
+              <div className="flex items-center justify-between pb-4 border-b border-emerald-500/15 mb-8">
+                <div className="flex items-center space-x-2.5">
+                  <span className="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]"></span>
+                  <h3 className="font-display font-bold text-lg sm:text-xl text-slate-100">
+                    Academic Milestones
+                  </h3>
+                </div>
+                <span className="text-xs font-mono text-emerald-400/80">3 Key Milestones</span>
+              </div>
+
+              {/* Vertical Illuminated Timeline */}
+              <div className="relative pl-6 sm:pl-8 border-l-2 border-emerald-500/30 space-y-8 ml-2 sm:ml-4">
+                {milestones.map((milestone, idx) => (
+                  <div key={idx} className="relative group">
+                    
+                    {/* Glowing Nodal Dot on Line */}
+                    <div className="absolute -left-[31px] sm:-left-[39px] top-1 flex items-center justify-center">
+                      <div className="relative flex items-center justify-center w-5 h-5">
+                        {idx === 0 && (
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
+                        )}
+                        <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-carbon-900 border-2 border-emerald-400 group-hover:border-lime-400 group-hover:scale-125 transition-transform duration-200 shadow-[0_0_10px_#10b981]"></span>
+                      </div>
+                    </div>
+
+                    {/* Milestone Card Content */}
+                    <div className="p-4 sm:p-5 rounded-2xl bg-carbon-950/60 border border-emerald-500/15 group-hover:border-emerald-400/50 group-hover:bg-carbon-850/90 transition-all duration-300 shadow-md group-hover:shadow-[0_8px_20px_rgba(16,185,129,0.15)] group-hover:-translate-y-0.5">
+                      <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <div className="flex items-center space-x-2">
+                          <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-md bg-emerald-950/80 text-lime-300 border border-emerald-500/30">
+                            {milestone.year}
+                          </span>
+                          <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider">
+                            {milestone.status}
+                          </span>
+                        </div>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-carbon-950 text-slate-400 border border-emerald-500/10">
+                          {milestone.badge}
+                        </span>
+                      </div>
+
+                      <h4 className="font-display font-bold text-base sm:text-lg text-slate-100 group-hover:text-emerald-300 transition-colors">
+                        {milestone.title}
+                      </h4>
+                      <div className="text-xs font-mono text-emerald-400/70 mb-2">
+                        {milestone.institution}
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-300/90 leading-relaxed font-sans">
+                        {milestone.description}
+                      </p>
+                    </div>
+
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Column: 2x2 Achievement Callout Badges (5 cols) */}
+            <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
+              <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-emerald-500/20 shadow-xl h-full flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between pb-4 border-b border-emerald-500/15 mb-6">
+                    <div className="flex items-center space-x-2.5">
+                      <span className="w-3 h-3 rounded-full bg-lime-400 shadow-[0_0_8px_#a3e635]"></span>
+                      <h3 className="font-display font-bold text-lg sm:text-xl text-slate-100">
+                        Accomplishments & Honors
+                      </h3>
+                    </div>
+                    <span className="text-xs font-mono text-lime-300/80">Highlights</span>
+                  </div>
+
+                  {/* Compact 2x2 Grid of Achievement Badges */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {achievements.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="p-4 rounded-2xl bg-carbon-950/70 border border-emerald-500/20 hover:border-emerald-400/70 hover:bg-carbon-850 hover:shadow-[0_0_20px_rgba(16,185,129,0.25)] hover:-translate-y-0.5 transition-all duration-300 group flex flex-col justify-between"
+                      >
+                        <div>
+                          <div className="flex items-center justify-between mb-2.5">
+                            <span className="text-2xl group-hover:scale-110 transition-transform">
+                              {item.icon}
+                            </span>
+                            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-carbon-950 text-emerald-400 border border-emerald-500/20">
+                              {item.category}
+                            </span>
+                          </div>
+                          <h4 className="font-display font-bold text-sm text-slate-100 group-hover:text-lime-300 transition-colors leading-snug mb-1.5">
+                            {item.title}
+                          </h4>
+                          <p className="text-[11px] text-slate-400 leading-relaxed font-sans">
+                            {item.description}
+                          </p>
+                        </div>
+
+                        <div className="mt-3 pt-2 border-t border-emerald-500/10 text-[10px] font-mono text-emerald-400/80 flex items-center justify-between">
+                          <span>{item.highlight}</span>
+                          <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Bottom Student Note */}
+                <div className="mt-6 pt-4 border-t border-emerald-500/15 flex items-center justify-between text-xs font-mono text-slate-400">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Active Contributor @ KSIT
+                  </span>
+                  <a
+                    href="#contact"
+                    className="text-emerald-400 hover:text-lime-300 transition-colors flex items-center gap-1"
+                  >
+                    Connect ↗
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      );
+    }
+
+    // ==========================================
+    // 11. Cursor Follower Component (Easter Egg)
+    // ==========================================
+    function CursorFollower() {
+      const cursorDotRef = useRef(null);
+      const cursorRingRef = useRef(null);
+      const [isHovered, setIsHovered] = useState(false);
+      const [isVisible, setIsVisible] = useState(false);
+
+      useEffect(() => {
+        let mouseX = -100;
+        let mouseY = -100;
+        let ringX = -100;
+        let ringY = -100;
+        let animId;
+
+        const handleMouseMove = (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          if (!isVisible) setIsVisible(true);
+
+          if (cursorDotRef.current) {
+            cursorDotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+          }
+        };
+
+        const handleMouseLeave = () => {
+          setIsVisible(false);
+        };
+
+        const handleMouseEnter = () => {
+          setIsVisible(true);
+        };
+
+        const render = () => {
+          ringX += (mouseX - ringX) * 0.16;
+          ringY += (mouseY - ringY) * 0.16;
+
+          if (cursorRingRef.current) {
+            cursorRingRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+          }
+          animId = requestAnimationFrame(render);
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseleave', handleMouseLeave);
+        document.addEventListener('mouseenter', handleMouseEnter);
+        animId = requestAnimationFrame(render);
+
+        const handleElementHover = (e) => {
+          const target = e.target.closest('a, button, input, textarea, .group, [role="button"]');
+          setIsHovered(!!target);
+        };
+        window.addEventListener('mouseover', handleElementHover);
+
+        return () => {
+          cancelAnimationFrame(animId);
+          window.removeEventListener('mousemove', handleMouseMove);
+          document.removeEventListener('mouseleave', handleMouseLeave);
+          document.removeEventListener('mouseenter', handleMouseEnter);
+          window.removeEventListener('mouseover', handleElementHover);
+        };
+      }, [isVisible]);
+
+      if (!isVisible) return null;
+
+      return (
+        <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden hidden md:block">
+          {/* Trailing Soft Ambient Glow Ring */}
+          <div
+            ref={cursorRingRef}
+            className={`fixed top-0 left-0 -ml-4 -mt-4 rounded-full border transition-all duration-150 pointer-events-none ${
+              isHovered
+                ? 'w-10 h-10 border-lime-400/80 bg-emerald-500/10 shadow-[0_0_24px_rgba(163,230,53,0.45)] scale-125'
+                : 'w-8 h-8 border-emerald-400/50 bg-emerald-500/5 shadow-[0_0_12px_rgba(16,185,129,0.25)]'
+            }`}
+            style={{ willChange: 'transform' }}
+          />
+          {/* Core Center Spark */}
+          <div
+            ref={cursorDotRef}
+            className="fixed top-0 left-0 -ml-1 -mt-1 w-2 h-2 rounded-full bg-lime-300 shadow-[0_0_8px_#a3e635] pointer-events-none"
+            style={{ willChange: 'transform' }}
+          />
+        </div>
+      );
+    }
+
+    // ==========================================
+    // 12. Magnetic Link Helper Component
+    // ==========================================
+    function MagneticLink({ href, icon: Icon, label, onClick }) {
+      const btnRef = useRef(null);
+      const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+      const handleMouseMove = (e) => {
+        if (!btnRef.current) return;
+        const rect = btnRef.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const dx = (e.clientX - centerX) * 0.35;
+        const dy = (e.clientY - centerY) * 0.35;
+        setOffset({ x: dx, y: dy });
+      };
+
+      const handleMouseLeave = () => {
+        setOffset({ x: 0, y: 0 });
+      };
+
+      return (
+        <a
+          ref={btnRef}
+          href={href}
+          target={href.startsWith('http') ? '_blank' : undefined}
+          rel="noreferrer"
+          onClick={onClick}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            transform: `translate(${offset.x}px, ${offset.y}px)`,
+            transition: offset.x === 0 ? 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)' : 'transform 0.08s ease-out',
+          }}
+          className="group relative flex items-center space-x-2.5 px-4 py-2.5 rounded-xl bg-carbon-900/80 hover:bg-carbon-850 border border-emerald-500/20 hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.35)] transition-colors text-slate-300 hover:text-white text-xs font-mono select-none"
+        >
+          <span className="text-emerald-400 group-hover:text-lime-300 transition-colors">
+            {Icon && <Icon />}
+          </span>
+          <span>{label}</span>
+        </a>
+      );
+    }
+
+    const LinkedinIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+        <rect x="2" y="9" width="4" height="12"></rect>
+        <circle cx="4" cy="4" r="2"></circle>
+      </svg>
+    );
+
+    const MailIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+      </svg>
+    );
+
+    // ==========================================
+    // 13. Student-Friendly 'Get In Touch' Contact Section
+    // ==========================================
+    function ContactSection() {
+      const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+      const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success'
+      const [copied, setCopied] = useState(false);
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!formData.name || !formData.email || !formData.message) return;
+
+        setStatus('loading');
+
+        setTimeout(() => {
+          setStatus('success');
+          setFormData({ name: '', email: '', message: '' });
+
+          setTimeout(() => {
+            setStatus('idle');
+          }, 5000);
+        }, 1200);
+      };
+
+      const copyEmail = (e) => {
+        e.preventDefault();
+        navigator.clipboard.writeText("shreelakshmi.aiml@ksit.edu.in");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2400);
+      };
+
+      return (
+        <section id="contact" className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+          {/* Section Header Tag */}
+          <div className="flex items-center justify-center space-x-2 text-xs font-mono text-emerald-400 mb-3">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>04 // INITIATE TRANSMISSION</span>
+          </div>
+
+          {/* Main Glass Contact Container */}
+          <div className="glass-panel rounded-3xl p-6 sm:p-10 md:p-12 border border-emerald-500/25 shadow-[0_0_40px_rgba(16,185,129,0.18)]">
+            
+            {/* Headline & Subtitle */}
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-100 tracking-tight">
+                Let’s Collaborate & Build
+              </h2>
+              <p className="mt-3 text-sm sm:text-base text-slate-300/90 leading-relaxed font-sans">
+                Open for summer internships, open-source projects, or tech chats. Drop me a message!
+              </p>
+            </div>
+
+            {/* Form & Direct Contact Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Interactive Form (7 cols) */}
+              <form onSubmit={handleSubmit} className="lg:col-span-7 space-y-4 text-left">
+                <div>
+                  <label htmlFor="name" className="block text-xs font-mono text-slate-300 mb-1.5 flex items-center justify-between">
+                    <span>YOUR NAME</span>
+                    <span className="text-emerald-400 text-[10px]">* Required</span>
+                  </label>
+                  <input
+                    id="name"
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    placeholder="e.g. Alex Chen"
+                    className="w-full px-4 py-3 rounded-xl bg-carbon-950/80 border border-emerald-500/20 text-slate-100 placeholder-slate-500 text-sm font-sans focus:outline-none focus:border-emerald-400 focus:shadow-[0_0_15px_rgba(16,185,129,0.25)] transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-xs font-mono text-slate-300 mb-1.5 flex items-center justify-between">
+                    <span>YOUR EMAIL</span>
+                    <span className="text-emerald-400 text-[10px]">* Required</span>
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    placeholder="alex@company.com"
+                    className="w-full px-4 py-3 rounded-xl bg-carbon-950/80 border border-emerald-500/20 text-slate-100 placeholder-slate-500 text-sm font-sans focus:outline-none focus:border-emerald-400 focus:shadow-[0_0_15px_rgba(16,185,129,0.25)] transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-xs font-mono text-slate-300 mb-1.5 flex items-center justify-between">
+                    <span>YOUR MESSAGE</span>
+                    <span className="text-emerald-400 text-[10px]">* Required</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    rows="4"
+                    required
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    placeholder="Hi Shree, I'd love to connect about an internship opportunity at..."
+                    className="w-full px-4 py-3 rounded-xl bg-carbon-950/80 border border-emerald-500/20 text-slate-100 placeholder-slate-500 text-sm font-sans focus:outline-none focus:border-emerald-400 focus:shadow-[0_0_15px_rgba(16,185,129,0.25)] transition-all resize-none"
+                  ></textarea>
+                </div>
+
+                {/* Submit Button with animated loading & success feedback */}
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className={`w-full relative inline-flex items-center justify-center px-6 py-3.5 rounded-xl font-mono text-sm font-bold tracking-wide transition-all duration-300 focus:outline-none ${
+                    status === 'success'
+                      ? 'bg-lime-400 text-slate-950 shadow-[0_0_25px_rgba(163,230,53,0.6)]'
+                      : status === 'loading'
+                      ? 'bg-emerald-600 text-slate-900 cursor-wait'
+                      : 'bg-gradient-to-r from-emerald-400 via-teal-300 to-lime-400 text-slate-950 shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:shadow-[0_0_30px_rgba(163,230,53,0.55)] hover:-translate-y-0.5 active:translate-y-0'
+                  }`}
+                >
+                  {status === 'loading' && (
+                    <span className="flex items-center space-x-2">
+                      <svg className="animate-spin h-4 w-4 text-slate-950" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                      </svg>
+                      <span>Encrypting & Sending...</span>
+                    </span>
+                  )}
+
+                  {status === 'success' && (
+                    <span className="flex items-center space-x-2">
+                      <span>Message Sent! 🚀</span>
+                    </span>
+                  )}
+
+                  {status === 'idle' && (
+                    <span className="flex items-center space-x-2">
+                      <span>Send Message</span>
+                      <span>↗</span>
+                    </span>
+                  )}
+                </button>
+
+                {status === 'success' && (
+                  <div className="p-3 rounded-xl bg-emerald-950/70 border border-emerald-400/40 text-lime-300 text-xs font-mono text-center">
+                    ✓ Thank you! Your message was transmitted. I'll get back to you shortly.
+                  </div>
+                )}
+              </form>
+
+              {/* Direct Channels & Magnetic Links (5 cols) */}
+              <div className="lg:col-span-5 flex flex-col justify-between space-y-6 pt-2 lg:pt-0 lg:pl-4">
+                
+                <div className="p-5 rounded-2xl bg-carbon-950/70 border border-emerald-500/20 text-left">
+                  <h3 className="font-display font-bold text-base text-slate-100 mb-1">
+                    Direct Channels
+                  </h3>
+                  <p className="text-xs text-slate-400 font-sans leading-relaxed mb-4">
+                    Prefer email or want to inspect my open source activity? Connect directly below:
+                  </p>
+
+                  <div className="space-y-2.5">
+                    <MagneticLink
+                      href="https://github.com"
+                      icon={GithubIcon}
+                      label="GitHub // github.com"
+                    />
+                    <MagneticLink
+                      href="https://linkedin.com"
+                      icon={LinkedinIcon}
+                      label="LinkedIn // Professional Network"
+                    />
+                    <MagneticLink
+                      href="mailto:shreelakshmi.aiml@ksit.edu.in"
+                      icon={MailIcon}
+                      label={copied ? "✓ Copied to clipboard!" : "shreelakshmi.aiml@ksit.edu.in"}
+                      onClick={copyEmail}
+                    />
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-emerald-950/30 border border-emerald-500/20 text-left">
+                  <div className="flex items-center space-x-2 text-xs font-mono text-lime-400 mb-1">
+                    <span className="w-2 h-2 rounded-full bg-lime-400"></span>
+                    <span>QUICK RESPONSE TIME</span>
+                  </div>
+                  <p className="text-xs text-slate-400 font-sans leading-relaxed">
+                    Typically active from 09:00 - 21:00 IST. Quickest response via direct student email.
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+      );
+    }
+
+    // ==========================================
+    // 14. Clean Footer Component
+    // ==========================================
+    function FooterSection() {
+      const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      return (
+        <footer className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-6 border-t border-emerald-500/10 text-center font-mono">
+          <div className="flex flex-col items-center justify-center space-y-3">
+            
+            {/* Back to top button */}
+            <button
+              type="button"
+              onClick={scrollToTop}
+              className="group flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-carbon-950/70 border border-emerald-500/20 text-slate-400 hover:text-lime-300 hover:border-emerald-400 text-xs transition-all hover:-translate-y-0.5 focus:outline-none"
+            >
+              <span>Back to Top</span>
+              <span className="group-hover:-translate-y-0.5 transition-transform">↑</span>
+            </button>
+
+            {/* Centered Credit Line */}
+            <p className="text-xs text-slate-300 tracking-wide">
+              Designed & Engineered by <span className="text-emerald-400 font-semibold">Shree Lakshmi</span> • Class of <span className="text-lime-300 font-semibold">2027</span>.
+            </p>
+
+            {/* Sub-note */}
+            <p className="text-[11px] text-slate-500">
+              Built with React 18, Tailwind CSS & HTML5 Canvas // KSIT Bengaluru
+            </p>
+          </div>
+        </footer>
+      );
+    }
+
+    // ==========================================
+    // 15. Master App Component
+    // ==========================================
+    function App() {
+      return (
+        <div className="relative min-h-screen selection:bg-emerald-500/30 selection:text-lime-300">
+          {/* HTML5 Matrix Dot Grid Canvas with cursor ripples */}
+          <MatrixGridCanvas />
+
+          {/* Interactive Mouse Feature (Easter Egg): Trailing Light Spark */}
+          <CursorFollower />
+
+          {/* Fixed Frosted Glass Navigation Bar */}
+          <Navbar />
+
+          {/* Complete Main Portfolio Flow */}
+          <main>
+            <HeroSection />
+            <FeaturedProjectsSection />
+            <TechStackSkillsSection />
+            <EducationCampusJourneySection />
+            <ContactSection />
+          </main>
+
+          {/* Clean Footer */}
+          <FooterSection />
+        </div>
+      );
+    }
+
+    // Mount React App
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
